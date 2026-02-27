@@ -6,7 +6,7 @@ from PIL import Image, UnidentifiedImageError
 
 # App title
 st.set_page_config(page_title="Pneumonia Detector", layout="centered")
-st.title("🩺 Pneumonia Detection from Chest X-Ray")
+st.title("Pneumonia Detection from Chest X-Ray")
 
 # Load the model
 model = load_model("pneumonia_densenet_model.h5")
@@ -26,13 +26,13 @@ if uploaded_file is not None:
 
         # Prediction
         prediction = model.predict(img_array)[0][0]
-        result = "🫁 Pneumonia" if prediction > 0.5 else "✅ Normal"
+        result = "Pneumonia" if prediction > 0.5 else "Normal"
         confidence = prediction if prediction > 0.5 else 1 - prediction
 
         st.markdown(f"### Prediction: **{result}**")
         st.markdown(f"Confidence: `{confidence:.2f}`")
 
     except UnidentifiedImageError:
-        st.error("⚠️ Unable to process the image. Please upload a valid image file.")
+        st.error("Unable to process the image. Please upload a valid image file.")
 else:
-    st.info("👆 Upload a chest X-ray image to get started.")
+    st.info("Upload a chest X-ray image to get started.")
